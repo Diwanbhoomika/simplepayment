@@ -52,7 +52,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "ats.urls"
+ROOT_URLCONF = "ats.ats.urls" 
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = "ats.wsgi.application"
+WSGI_APPLICATION = "ats.ats.wsgi.application"
 LOGIN_URL = "login"              
 LOGIN_REDIRECT_URL = "plans"     
 LOGOUT_REDIRECT_URL = "login"  
