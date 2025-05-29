@@ -19,8 +19,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from subscriptions.views import signup_view 
-from subscriptions.views import LogoutViewAllowGet
+from ats.subscriptions.views import signup_view
+from ats.subscriptions.views import LogoutViewAllowGet
 
 urlpatterns = [
     path("admin/", admin.site.urls),
