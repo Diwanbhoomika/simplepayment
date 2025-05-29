@@ -27,8 +27,8 @@ urlpatterns = [
     path("login/",  auth_views.LoginView.as_view(template_name="registration/login.html"), name="login"),
     path("logout/", LogoutViewAllowGet.as_view(), name="logout"),
     path("signup/", signup_view, name="signup"),   
-    path("api/", include("subscriptions.urls")),   # keep the API
-    path("",   include("subscriptions.urls")),     # HTML pages
+    path("api/",include("ats.subscriptions.urls")),   # keep the API
+    path("",   include("ats.subscriptions.urls")),     # HTML pages
 ]
 
  
