@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Available plans</h2>
+<ul>
+{% for p in plans %}
+  <li><strong>{{ p.name }}</strong> – ₹{{ p.price }}
+      {% if user.is_authenticated %}
+        <button class="btn" onclick="checkout({{ p.id }})">Subscribe</button>
+      {% endif %}
+  </li>
+{% endfor %}
+</ul>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+async function checkout(planId){
+  const resp = await fetch("{% url 'razorpay_create_order' %}", {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "X-CSRFToken":"{{ csrf_token }}"
+      },
+      body: JSON.stringify({plan_id: planId})
+  });
+  const data = await resp.json();               // data.order.*
+
+  const opts = {
+      key: "{{ RAZORPAY_KEY_ID }}",
+      order_id: data.order.id,
+      amount:    data.order.amount,
+      currency: "INR",
+      name: "Resume-ATS demo",
+      description: "₹1 intro plan",
+      handler: async function (response){
+          await fetch("{% url 'razorpay_verify' %}", {
+              method:"POST",
+              headers:{
+                "Content-Type":"application/json",
+                "X-CSRFToken":"{{ csrf_token }}"
+              },
+              body: JSON.stringify(response)
+          });
+          window.location.href = "{% url 'thank_you' %}";
+      },
+      theme: { color: "#0A9" }
+  };
+  new Razorpay(opts).open();
+}
+</script>
+{% endblock %}

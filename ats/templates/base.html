@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Subscription Demo</title>
+    <style>
+        body{font-family:system-ui;margin:2rem}
+        nav a{margin-right:1rem}
+        .btn{padding:.4rem .8rem;border:1px solid #666;border-radius:4px;text-decoration:none}
+    </style>
+</head>
+<body>
+<nav>
+{% if user.is_authenticated %}
+    Hello {{ user.username }} |
+    <a href="{% url 'plans' %}">Plans</a>
+    <a href="{% url 'me' %}">My subscription</a>
+    <a href="{% url 'premium_demo' %}">Premium demo</a>
+
+    <form action="{% url 'logout' %}" method="post" style="display:inline">
+        {% csrf_token %}
+        <button style="background:none;border:none;color:#00f;cursor:pointer;">
+            Logout
+        </button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}?next=/">Login</a> |
+    <a href="{% url 'signup' %}">Sign up</a>
+{% endif %}
+</nav>
+{% if messages %}
+    <ul style="color: green;">
+        {% for m in messages %}
+            <li>{{ m }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<hr>
+{% block content %}{% endblock %}
+</body>
+</html>

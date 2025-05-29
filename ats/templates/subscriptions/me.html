@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My subscription</h2>
+
+{% if sub %}
+    <p>Plan: <strong>{{ sub.plan.name }}</strong></p>
+    <p>Active: {{ sub.active }}</p>
+    <p>Ends: {{ sub.end|date:"r" }}</p>
+
+    {% if sub.active %}
+        <form action="{% url 'cancel' %}" method="post">
+            {% csrf_token %}
+            <button class="btn">Cancel subscription</button>
+        </form>
+    {% endif %}
+{% else %}
+    <p><em>You have no subscription yet.</em></p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>🎉 Subscription activated</h2>
+<p>Thanks, {{ user.username }}! Premium features are now live.</p>
+<p><a href="{% url 'premium_demo' %}">Go to premium demo</a></p>
+{% endblock %}
