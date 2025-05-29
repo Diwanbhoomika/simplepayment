@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-i@zr*-y$qvoi4aj)!sgvjwztxq_1%i8_&=#9f+b3ft*-d8td(9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["simplepayment.onrender.com"]
 
 
 # Application definition
